@@ -13,11 +13,6 @@ public class CoffeeController {
 
     public CoffeeController(CoffeeRepository repository) {
         this.repository = repository;
-        this.repository.saveAll(List.of(
-                new Coffee("Africano"),
-                new Coffee("Americano"),
-                new Coffee("123124234aqwe", "Indiano")
-        ));
     }
 
 
