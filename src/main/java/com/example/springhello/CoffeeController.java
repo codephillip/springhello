@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/coffees")
 @RestController
 public class CoffeeController {
-    private final List<Coffee> coffees = new ArrayList<>();
+    private final CoffeeRepository repository;
 
-    public CoffeeController() {
-        coffees.addAll(List.of(
+    public CoffeeController(CoffeeRepository repository) {
+        this.repository = repository;
+        this.repository.saveAll(List.of(
                 new Coffee("Africano"),
                 new Coffee("Americano"),
                 new Coffee("123124234aqwe", "Indiano")
@@ -23,30 +23,23 @@ public class CoffeeController {
 
     @GetMapping
     Iterable<Coffee> getCoffees() {
-        return coffees;
+        return repository.findAll();
     }
 
     @PostMapping
     Coffee postCoffee(@RequestBody Coffee coffee) {
-        coffees.add(coffee);
+        repository.save(coffee);
         return coffee;
     }
 
     @PutMapping("/{id}")
     ResponseEntity<Coffee> putCoffee(@PathVariable String id, @RequestBody Coffee coffee) {
-        int index = -1;
-        for (Coffee c : coffees) {
-            if (c.getId().equals(id)) {
-                index = coffees.indexOf(c);
-                coffees.set(index, coffee);
-            }
-        }
-        return index == -1 ? new ResponseEntity<>(postCoffee(coffee), HttpStatus.CREATED) :
-                new ResponseEntity<>(coffee, HttpStatus.OK);
+        return repository.existsById(id) ? new ResponseEntity<>(postCoffee(coffee), HttpStatus.CREATED) :
+                new ResponseEntity<>(repository.save(coffee), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     void deleteCoffee(@PathVariable String id) {
-        coffees.removeIf(coffee -> coffee.getId().equals(id));
+        repository.deleteById(id);
     }
 }
