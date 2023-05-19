@@ -34,7 +34,7 @@ public class CoffeeController {
 
     @PutMapping("/{id}")
     ResponseEntity<Coffee> putCoffee(@PathVariable String id, @RequestBody Coffee coffee) {
-        int index = -1;123124234aqwe
+        int index = -1;
         for (Coffee c : coffees) {
             if (c.getId().equals(id)) {
                 index = coffees.indexOf(c);
