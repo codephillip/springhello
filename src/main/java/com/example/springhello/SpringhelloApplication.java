@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +19,17 @@ import java.util.List;
 @ConfigurationPropertiesScan
 //@RestController
 public class SpringhelloApplication {
-	private static final Logger log = LoggerFactory.getLogger(SpringhelloApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(SpringhelloApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringhelloApplication.class);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringhelloApplication.class);
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "droid")
+    Droid createDroid() {
+        return new Droid();
+    }
 //	@GetMapping("/hello")
 //	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 //		return String.format("Helloevery %s!", name);
