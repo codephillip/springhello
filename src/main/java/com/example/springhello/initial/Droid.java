@@ -1,4 +1,4 @@
-package com.example.springhello;
+package com.example.springhello.initial;
 
 public class Droid {
     private String id;

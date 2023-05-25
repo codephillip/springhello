@@ -1,12 +1,9 @@
-package com.example.springhello;
+package com.example.springhello.initial;
 
-import com.example.springhello.variables.Greeting;
-import org.springframework.beans.factory.annotation.Value;
+import com.example.springhello.initial.variables.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/greeting")

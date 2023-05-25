@@ -1,4 +1,4 @@
-package com.example.springhello.variables;
+package com.example.springhello.initial.variables;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

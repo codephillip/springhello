@@ -1,4 +1,4 @@
-package com.example.springhello;
+package com.example.springhello.initial;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
